@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import HomeScreen from './HomeScreen'; // Replace with the actual path to HomeScreen
-import DetailsScreen from './DetailsScreen'; // Replace with the actual path to DetailsScreen
+import DetailsScreen from './DetailsScreen'; 
+import LoginScreen from './Login_Screen'; 
 
 export default function App() {
-  const [items, setItems] = useState<string[]>([]); // Shared state for items
-  const [currentScreen, setCurrentScreen] = useState<'Home' | 'Details'>('Home'); // Manage screens manually
+  const [items, setItems] = useState<
+    { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]
+  >([]); // Shared state for items
+  const [currentScreen, setCurrentScreen] = useState<'Home' | 'Details' | 'Login'>('Login'); // Manage screens manually
 
-  const handleNavigate = (screen: 'Home' | 'Details') => {
+  const handleNavigate = (screen: 'Home' | 'Details' | 'Login') => {
     setCurrentScreen(screen);
   };
 
   return (
     <View style={styles.container}>
-      {currentScreen === 'Home' ? (
+      {currentScreen === 'Login' && (
+        <LoginScreen onNavigate={handleNavigate} />
+      )}
+      {currentScreen === 'Home' && (
         <HomeScreen setItems={setItems} items={items} onNavigate={handleNavigate} />
-      ) : (
+      )}
+      {currentScreen === 'Details' && (
         <DetailsScreen items={items} onNavigate={handleNavigate} />
       )}
     </View>
