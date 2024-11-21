@@ -4,13 +4,19 @@ import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
 interface DetailsScreenProps {
   items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
   onNavigate: (screen: 'Home' | 'Details' | 'Login') => void;
+  setItems: (items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]) => void;
 }
 
-export default function DetailsScreen({ items, onNavigate }: DetailsScreenProps) {
+export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsScreenProps) {
   const calculateAveragePrice = () => {
     if (items.length === 0) return 0;
     const total = items.reduce((sum, item) => sum + item.price, 0);
     return (total / items.length).toFixed(2);
+  };
+
+  const handleDelete = (index: number) => {
+    const updatedItems = items.filter((_, i) => i !== index); // Remove item at the given index
+    setItems(updatedItems);
   };
 
   const categorizedItems = items.reduce(
@@ -29,7 +35,7 @@ export default function DetailsScreen({ items, onNavigate }: DetailsScreenProps)
     <View style={styles.container}>
       <Text style={styles.title}>Items List</Text>
       <Text style={styles.average}>
-        Average Price: ${calculateAveragePrice()}
+        Average Price: R{calculateAveragePrice()}
       </Text>
       <Text style={styles.subtitle}>Starters:</Text>
       {categorizedItems.Starter.map((item, index) => (
@@ -43,6 +49,20 @@ export default function DetailsScreen({ items, onNavigate }: DetailsScreenProps)
       {categorizedItems.Dessert.map((item, index) => (
         <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
       ))}
+      {categorizedItems.Main.map((item, index) => (
+       <Pressable key={index} style={styles.deleteButton} onPress={() => handleDelete(index)}>
+         <Text style={styles.deleteText}>Delete {item.name}</Text>
+       </Pressable>
+      ))}
+
+       <Pressable
+        style={styles.deleteButton}
+        onPress={() => handleDelete(items.indexOf(items[items.length - 1]))}
+        >
+          <Text style={styles.deleteText}>Delete</Text>
+        </Pressable>
+     
+      
       <Pressable style={styles.link} onPress={() => onNavigate('Home')}>
         <Text style={styles.linkText}>Go Back</Text>
       </Pressable>
@@ -85,4 +105,19 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontSize: 16,
   },
+  deleteButton: {
+    backgroundColor: '#ff4d4d',
+    padding: 5,
+    borderRadius: 5,
+  },
+  deleteText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  }
 });
+
+
+function setItems(updatedItems: { name: string; price: number; category: "Starter" | "Main" | "Dessert"; }[]) {
+  throw new Error('Function not implemented.');
+}
+

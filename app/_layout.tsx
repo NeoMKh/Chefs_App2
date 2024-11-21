@@ -23,7 +23,7 @@ export default function App() {
         <HomeScreen setItems={setItems} items={items} onNavigate={handleNavigate} />
       )}
       {currentScreen === 'Details' && (
-        <DetailsScreen items={items} onNavigate={handleNavigate} />
+        <DetailsScreen setItems={setItems} items={items}  onNavigate={handleNavigate} />
       )}
     </View>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Pressable,  StyleSheet } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
+import ModalSelector from 'react-native-modal-selector';
 
 
 
@@ -18,6 +19,12 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<string>(''); // Input as string to parse later
   const [category, setCategory] = useState<'Starter' | 'Main' | 'Dessert'>('Starter');
+
+  const data = [
+    { key: 'Starter', label: 'Starter' },
+    { key: 'Main', label: 'Main' },
+    { key: 'Dessert', label: 'Dessert' },
+  ];
 
   const handleAddItem = () => {
     if (!name.trim() || !price.trim() || isNaN(Number(price))) {
@@ -49,6 +56,14 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
         keyboardType="numeric"
         onChangeText={setPrice}
       />
+     
+     <Text style={styles.title}>Select Category</Text>
+      <ModalSelector
+        data={data}
+        initValue={category}
+        onChange={(option) => setCategory(option.key as 'Starter' | 'Main' | 'Dessert')}
+      />
+      <Text>Selected: {category}</Text>
       
        
       <Button title="Add Item" onPress={handleAddItem} />
@@ -80,10 +95,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 5,
   },
-  picker: {
-    height: 50,
-    marginBottom: 10,
-  },
+  
   link: {
     marginTop: 10,
     alignItems: 'center',
@@ -92,5 +104,10 @@ const styles = StyleSheet.create({
     color: 'blue',
     textDecorationLine: 'underline',
     fontSize: 16,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+    marginBottom: 10,
   },
 });
