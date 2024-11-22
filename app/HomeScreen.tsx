@@ -6,10 +6,10 @@ import ModalSelector from 'react-native-modal-selector';
 
 
 interface HomeScreenProps {
-  items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+  items: { name: string; price: number; discription: string ;category: 'Starter' | 'Main' | 'Dessert' }[];
   setItems: React.Dispatch<
     React.SetStateAction<
-      { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]
+      { name: string; price: number; discription: string ;category: 'Starter' | 'Main' | 'Dessert' }[]
     >
   >;
   onNavigate: (screen: 'Home' | 'Details' | 'Login') => void;
@@ -19,6 +19,7 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<string>(''); // Input as string to parse later
   const [category, setCategory] = useState<'Starter' | 'Main' | 'Dessert'>('Starter');
+  const [discription, setDiscription] = useState<string>('');
 
   const data = [
     { key: 'Starter', label: 'Starter' },
@@ -33,11 +34,12 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
     }
     setItems([
       ...items,
-      { name: name.trim(), price: parseFloat(price.trim()), category },
+      { name: name.trim(), price: parseFloat(price.trim()), discription ,category },
     ]);
     setName('');
     setPrice('');
     setCategory('Starter');
+    setDiscription('');
   };
 
   return (
@@ -48,6 +50,12 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
         placeholder="Enter item name"
         value={name}
         onChangeText={setName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter item discription"
+        value={discription}
+        onChangeText={setDiscription}
       />
       <TextInput
         style={styles.input}

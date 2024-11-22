@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
 
 interface DetailsScreenProps {
-  items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+  items: { name: string;discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
   onNavigate: (screen: 'Home' | 'Details' | 'Login'| 'Final Menu') => void;
-  setItems: (items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]) => void;
+  setItems: (items: { name: string; price: number; discription: string ,category: 'Starter' | 'Main' | 'Dessert' }[]) => void;
 }
 
 export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsScreenProps) {
@@ -25,9 +25,9 @@ export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsS
       return acc;
     },
     { Starter: [], Main: [], Dessert: [] } as {
-      Starter: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
-      Main: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
-      Dessert: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Starter: { name: string; discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Main: { name: string; discription: string ; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Dessert: { name: string; discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
     }
   );
 
@@ -39,15 +39,15 @@ export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsS
       </Text>
       <Text style={styles.subtitle}>Starters:</Text>
       {categorizedItems.Starter.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name},${item.discription} - R${item.price}`}</Text>
       ))}
       <Text style={styles.subtitle}>Mains:</Text>
       {categorizedItems.Main.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name},${item.discription} - R${item.price}`}</Text>
       ))}
       <Text style={styles.subtitle}>Desserts:</Text>
       {categorizedItems.Dessert.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name},${item.discription} - R${item.price}`}</Text>
       ))}
       {categorizedItems.Main.map((item, index) => (
        <Pressable key={index} style={styles.deleteButton} onPress={() => handleDelete(index)}>
@@ -81,17 +81,21 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#0262aa',
     borderBlockColor: 'white',
+    borderWidth: 2,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+    color: 'white',
   },
   average: {
     fontSize: 16,
     textAlign: 'center',
     marginBottom: 10,
+    textDecorationColor: 'white',
+    color: 'white',
   },
   subtitle: {
     fontSize: 18,
@@ -101,6 +105,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 5,
+    
   },
   item: {
     fontSize: 16,
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
 });
 
 
-function setItems(updatedItems: { name: string; price: number; category: "Starter" | "Main" | "Dessert"; }[]) {
+function setItems(updatedItems: { name: string; discription: string ;price: number; category: "Starter" | "Main" | "Dessert"; }[]) {
   throw new Error('Function not implemented.');
 }
 

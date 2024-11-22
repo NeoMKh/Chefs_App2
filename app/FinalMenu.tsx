@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
 
 interface FinalMenuProps {
-  items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+  items: { name: string; discription: string ,price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
   onNavigate: (screen: 'Home' | 'Details' | 'Login'|'Final Menu') => void;
   
 }
@@ -22,9 +22,9 @@ export default function FinalMenu({ items, onNavigate,}: FinalMenuProps) {
       return acc;
     },
     { Starter: [], Main: [], Dessert: [] } as {
-      Starter: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
-      Main: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
-      Dessert: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Starter: { name: string; discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Main: { name: string; discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
+      Dessert: { name: string; discription: string ;price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
     }
   );
 
@@ -36,15 +36,15 @@ export default function FinalMenu({ items, onNavigate,}: FinalMenuProps) {
       </Text>
       <Text style={styles.subtitle}>Starters:</Text>
       {categorizedItems.Starter.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name}, ${item.discription} - R${item.price}`}</Text>
       ))}
       <Text style={styles.subtitle}>Mains:</Text>
       {categorizedItems.Main.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name}, ${item.discription} - R${item.price}`}</Text>
       ))}
       <Text style={styles.subtitle}>Desserts:</Text>
       {categorizedItems.Dessert.map((item, index) => (
-        <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
+        <Text key={index} style={styles.item}>{`${item.name}, ${item.discription} - R${item.price}`}</Text>
       ))}
       
            
@@ -61,12 +61,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#0262aa',
+    borderBlockColor: 'white',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+    color: 'white',
   },
   average: {
     fontSize: 16,
@@ -77,33 +80,31 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
   },
   item: {
     fontSize: 16,
     padding: 5,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
   },
   link: {
     marginTop: 20,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   linkText: {
     color: 'blue',
     textDecorationLine: 'underline',
     fontSize: 16,
   },
-  deleteButton: {
-    backgroundColor: '#ff4d4d',
-    padding: 5,
-    borderRadius: 5,
-  },
-  deleteText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  }
 });
 
 
-function setItems(updatedItems: { name: string; price: number; category: "Starter" | "Main" | "Dessert"; }[]) {
-  throw new Error('Function not implemented.');
-}
+
 

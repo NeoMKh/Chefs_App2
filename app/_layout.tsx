@@ -8,7 +8,7 @@ import FinalMenu from './FinalMenu';
 
 export default function App() {
   const [items, setItems] = useState<
-    { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]
+    { name: string; price: number; deiscription: string ;category: 'Starter' | 'Main' | 'Dessert' }[]
   >([]); // Shared state for items
   const [currentScreen, setCurrentScreen] = useState<'Home' | 'Details' | 'Login'| 'Final Menu'>('Login'); // Manage screens manually
 
