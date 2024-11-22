@@ -1,23 +1,20 @@
 import React from 'react';
 import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
 
-interface DetailsScreenProps {
+interface FinalMenuProps {
   items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[];
-  onNavigate: (screen: 'Home' | 'Details' | 'Login'| 'Final Menu') => void;
-  setItems: (items: { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]) => void;
+  onNavigate: (screen: 'Home' | 'Details' | 'Login'|'Final Menu') => void;
+  
 }
 
-export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsScreenProps) {
+export default function FinalMenu({ items, onNavigate,}: FinalMenuProps) {
   const calculateAveragePrice = () => {
     if (items.length === 0) return 0;
     const total = items.reduce((sum, item) => sum + item.price, 0);
     return (total / items.length).toFixed(2);
   };
 
-  const handleDelete = (index: number) => {
-    const updatedItems = items.filter((_, i) => i !== index); // Remove item at the given index
-    setItems(updatedItems);
-  };
+  
 
   const categorizedItems = items.reduce(
     (acc, item) => {
@@ -33,7 +30,7 @@ export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsS
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Items List</Text>
+      <Text style={styles.title}>Items On The Menu</Text>
       <Text style={styles.average}>
         Average Price: R{calculateAveragePrice()}
       </Text>
@@ -49,26 +46,11 @@ export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsS
       {categorizedItems.Dessert.map((item, index) => (
         <Text key={index} style={styles.item}>{`${item.name} - R${item.price}`}</Text>
       ))}
-      {categorizedItems.Main.map((item, index) => (
-       <Pressable key={index} style={styles.deleteButton} onPress={() => handleDelete(index)}>
-         <Text style={styles.deleteText}>Delete {item.name}</Text>
-       </Pressable>
-      ))}
-
-       <Pressable
-        style={styles.deleteButton}
-        onPress={() => handleDelete(items.indexOf(items.find((item) => item.category === 'Main')!))}
-        >
-          <Text style={styles.deleteText}>Delete</Text>
-        </Pressable>
-     
+      
+           
       
       <Pressable style={styles.link} onPress={() => onNavigate('Home')}>
         <Text style={styles.linkText}>Go Back</Text>
-      </Pressable>
-
-      <Pressable style={styles.link} onPress={() => onNavigate('Final Menu')}>
-        <Text style={styles.linkText}>Final Menu</Text>
       </Pressable>
     </View>
   );

@@ -3,14 +3,16 @@ import { View, StyleSheet } from 'react-native';
 import HomeScreen from './HomeScreen'; // Replace with the actual path to HomeScreen
 import DetailsScreen from './DetailsScreen'; 
 import LoginScreen from './Login_Screen'; 
+import FinalMenu from './FinalMenu';
+
 
 export default function App() {
   const [items, setItems] = useState<
     { name: string; price: number; category: 'Starter' | 'Main' | 'Dessert' }[]
   >([]); // Shared state for items
-  const [currentScreen, setCurrentScreen] = useState<'Home' | 'Details' | 'Login'>('Login'); // Manage screens manually
+  const [currentScreen, setCurrentScreen] = useState<'Home' | 'Details' | 'Login'| 'Final Menu'>('Login'); // Manage screens manually
 
-  const handleNavigate = (screen: 'Home' | 'Details' | 'Login') => {
+  const handleNavigate = (screen: 'Home' | 'Details' | 'Login'| 'Final Menu') => {
     setCurrentScreen(screen);
   };
 
@@ -25,6 +27,9 @@ export default function App() {
       {currentScreen === 'Details' && (
         <DetailsScreen setItems={setItems} items={items}  onNavigate={handleNavigate} />
       )}
+      {currentScreen === 'Final Menu' && (
+        <FinalMenu items={items}  onNavigate={handleNavigate} />
+      )}      
     </View>
   );
 }
