@@ -58,7 +58,7 @@ export default function HomeScreen({ items, setItems, onNavigate }: HomeScreenPr
       />
      
      <Text style={styles.title}>Select Category</Text>
-      <ModalSelector
+      <ModalSelector style={styles.input}
         data={data}
         initValue={category}
         onChange={(option) => setCategory(option.key as 'Starter' | 'Main' | 'Dessert')}
@@ -81,12 +81,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#0262aa',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
+    
+    
   },
   input: {
     borderWidth: 1,
@@ -94,11 +97,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
+    backgroundColor: 'white',
+    
   },
   
   link: {
     marginTop: 10,
     alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
   },
   linkText: {
     color: 'blue',
@@ -109,5 +118,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     marginBottom: 10,
+    backgroundColor: 'white',
   },
 });

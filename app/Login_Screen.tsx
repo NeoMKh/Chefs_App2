@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, Pressable } from 'react-native'
+import { Text, StyleSheet, View, Pressable, Image } from 'react-native'
 import { Link,useNavigation } from 'expo-router';
 import React from 'react';
 
@@ -14,6 +14,7 @@ export default function Login_Screen({onNavigate }: Login_ScreenProps) {
  
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Image source={require('../assets/images/Chefs.jpg')} style={{width: 150, height: 200}}/>
         <Text style={styles.text}>Welcome to Chef Chrisfels Menu app</Text>
         <Pressable  onPress={() => onNavigate('Details')}>
          <Text style={styles.link}>View Menu</Text>

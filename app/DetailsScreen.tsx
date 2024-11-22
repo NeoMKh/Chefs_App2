@@ -57,14 +57,14 @@ export default function DetailsScreen({ items, onNavigate, setItems  }: DetailsS
 
        <Pressable
         style={styles.deleteButton}
-        onPress={() => handleDelete(items.indexOf(items.find((item) => item.category === 'Main')!))}
+        onPress={() => handleDelete(items.indexOf(items[items.length - 1]))}
         >
           <Text style={styles.deleteText}>Delete</Text>
         </Pressable>
      
       
       <Pressable style={styles.link} onPress={() => onNavigate('Home')}>
-        <Text style={styles.linkText}>Go Back</Text>
+        <Text style={styles.linkText}>Add Items</Text>
       </Pressable>
 
       <Pressable style={styles.link} onPress={() => onNavigate('Final Menu')}>
@@ -79,6 +79,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#0262aa',
+    borderBlockColor: 'white',
   },
   title: {
     fontSize: 20,
@@ -95,14 +97,23 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginTop: 10,
+    backgroundColor: '#fff',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
   },
   item: {
     fontSize: 16,
     padding: 5,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
   },
   link: {
     marginTop: 20,
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   linkText: {
     color: 'blue',
